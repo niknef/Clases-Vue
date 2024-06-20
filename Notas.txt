@@ -1,6 +1,124 @@
 --- VUE - Mabe Garcia ----
 
-CLASE N°1
+Materia Promocionable
 
+Link web oficial vuejs:
+
+https://es.vuejs.org/v2/guide/
+
+
+Link para extensión de Chrome vue.js devtools:
+
+https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=es
+
+
+Link para extensión de Firefox vue.js devtools:
+
+https://addons.mozilla.org/es/firefox/addon/vue-js-devtools/
+
+VERSION A USAR : 2.7
+
+//CLASE N°1
+video:
+https://drive.google.com/file/d/13uXPIDn-9tdRtZixkccKj-GnH3gExobN/view
+
+FRAMEWOK VUEJS
+
+    -Creado por Evan You
+    -Inspirado en angular.js, reactive.js y rivets.js
+    -Framework progresivo para construir interfaces de usuarios
+    -Progresivo significa que podemos usarlo para algo muy basico, o agregarle más elementos para aplicaciones más complejas. 
+    -Trabaja solo en la capa de la vista, siendo sencillo integrar con otros proyectos o bibliotecas existentes.
+
+CARACTERISTICAS:
     
+    -Framework Progresivo de codigo abierto:
+        podemos incluir herramientas que necesitemos
+    -Virtual Dom:
+        Es cualquier tipo de representacion de un DOM real. trata de evitar cambios innesearios en el DOM, que son caros en cuanto reendimiento.
+
+        la re-reoresentacion solo ocurre una vez que se aplica un conjunto de cambios al DOM.
+
+    -Representacion declarativa:
+        Podemos crear variables en nuestras apps e imprimirlas en la vista
+    
+    -Componentes: 
+        Pieza de codigo creada por nosotros que va a representar un sector de la pagina, los componentes, tienen sus propios datos, su propio JS, etc (Pueden ser reutilizables)
+
+    -Adaptabilidad: 
+        Se puede añadir a aplicaciones web ya existentes y aprovecharlo sin mayores problemas de instalacion
+
+    -Patron MVVM (Modelo Vista - Vista Modelo)
+        Patrón de diseño o modelo de abstraccion usados para definir y estructurar los componentes necesarios en el desarrollo de software
+
+    El modelo: 
+    Representacion de datos y la logica del negocio, contiene la informacion
+
+    La vista: 
+    Debe representar la informacion a traves de los elementos visuales que la componentes
+
+    -sistema reactivo:
+        Mantiene interaccion constante con su entorno. por medio de enventos.
+
+--Vue lo podemos usar desde cdn o de manera local-- 
+
+-CDN (link desde la pagna de vue)
+-Local (descargamos el archivo VUE lo colocamos en nuestra carpeta de scripts)
+
+HERRAMIENTA PARA DEBUG:
+
+    Extension para navegador (Chrome y firefox)
+        Vue.js devtools
+
+MANOS A LA OBRA:
+
+    .Necesitamos incorporar Vue a nuestro proyectos
+
+    .Nosotros vamos a ir a esta direccion y vamos a tenerlo de manera local.
+
+    .Es la forma mas sencilla para empezar y necesitamos que vue funcione mas alla de la coneccion de red 
+
+    .Vamos a tener otro archivo js en el cual vamos a desarrollar la logica para poder trabajar.
+
+    .Este Archivo tendra por ejemplo:
+
+    var app = new Vue({ //crea una  instancia de Vue, le pasa un objeto options
+    
+    el:'#app',
+    data: {
+        mensajito:'Dato Dinamico'
+    }
+    })
+    
+    el: Proporciona a la instacia de Vue un elemento del DOM existente para montarse. puede ser un selectir CSS. (no se puede montar en la etiqueta html o body)
+
+    vue no se puede poner en body
+
+    data: 
+        un objeto con todas las variables que vamos a utilizar
+
+        Para la instancia de vue es un object. Almacenamos las variables y sus valores
+
+        .En la vista tendremos un div con el id mostrar y dentro un parrafo con unas dobles llaves con el nombre de la propiedad del objeto data que queremos mostrar.
+
+        .Esto se conoce como interpolacion, es un enlace de datos que mostrar el valor de la variable.
+
+            <div id="mostrar">
+                <p>{{mensajito}}</p>
+            </div>
+
+        .tambien podria actualizarse cada vez que cambie la propiedad mensajito del objeto data 
+
+        (--CLASE 1 1:15)
+
+//CLASE N°2
+
+Video: 
+
+https://drive.google.com/file/d/1EZNAn8u8O59qX_6-DZ9u40dSASfMOLuh/view?pli=1
+
+
+
+
+
 
