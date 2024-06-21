@@ -1,0 +1,48 @@
+/* Eliminamos el margen y el padding predeterminado */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+.navbar {
+    background-color: #343a40;
+}
+.navbar-brand {
+    color: white;
+    font-weight: bold;
+}
+.navbar-brand:hover {
+    color: #ddd;
+}
+.btn-contacto {
+    color: white;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.btn-contacto:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+main {
+    padding: 20px;
+    text-align: center;
+}
+.exercise-buttons {
+    margin-top: 20px;
+}
+.exercise-buttons .btn {
+    width: 100%;
+}
+footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
