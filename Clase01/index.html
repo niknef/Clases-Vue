@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    //link VUE LOCAL
     <script src="./scripts/vue.js"></script>
 
     <title>Clase 1 - VUE</title>
@@ -21,8 +19,44 @@
 <body>
     
     <div class="mostrar" v-cloak>
-        
+        <h1 v-once>Esto no va a cambiar : {{titulo}}</h1>
+
+    <div v-bind:class="{red: esRojo}">
+        <p v-once>este parrafo se mostrara en rojo</p>
+        <p>Este parrafo se mostrara en rojo y tiene una suma: {{3+5}}</p>
+
     </div>
+
+    <p> ACA --> {{mensajito}}</p>
+
+    <div>
+        <img v-bind:src="imagen" v-bind:title="texto"v-bind:alt="descripcion">
+
+        <!--METODO ALTERNATIVO:
+            <img :src ="imagen" v-bind:title=texto>
+            -->
+    </div>
+
+    <p v-show="ver">Este texto se mostrara en tanto la variable tenga valor true, casi contrario iria con display none</p>
+
+    <div>
+        <input type="checkbox" v-model="booleano">
+        <!-- 
+            <label v-bind:styles="booleano ?'background-color: green;', color: white;' : 'background-color: red;', color: white;'"> valor del checkbox:</label>
+        -->
+        <label v-bind:class=" booleano ? 'green' : 'red'"> valor del checkbox: {{booleano}}</label>
+
+    </div>
+
+    <div v-html="codigo">
+     <p>hola</p>
+
+    </div>
+
+    <p v-pre>Directiva v-pre: {{mensajito}}</p>
+
+
+</div>
 
 
 

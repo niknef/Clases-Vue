@@ -109,7 +109,36 @@ MANOS A LA OBRA:
 
         .tambien podria actualizarse cada vez que cambie la propiedad mensajito del objeto data 
 
-        (--CLASE 1 1:15)
+        .Los datos y el DOM ahora estan vinculados
+
+        .Si vamoa a la consola del mavegador, podremos ver ahora este elemento es reactivo
+
+        .Si le cambiamos el contenido a la variable, veremos inmediatamente el cambio.
+
+        .Se pueden realizar interpolaciones unicas que no se actualizan en el cambio de datos, por medio de una directiva
+
+    DIRECTIVAS:
+
+        .Las directivas ofrecen distintos tipo de comportamientos reactivos especiales al DOM representado sobre las etiquetas en las cuales se aplican.
+
+        .Son Atributos especiales para un elemento con prefico V-algo
+        
+        -v-once --> Renderizara el elemento solo una vez. esto puede ser utilizado para optimizar la performance de actualizacion.
+
+        -v-show --> Esta directiva permite mostrar de modo condicional un elemento.
+            
+            .Este se rendereizara y lo veremos en el DOM
+
+            .Si el valor de la variable es true, mostrar el elemento, si es false, le aplicara display:none 
+        
+        .Las llaves dobles interpretan datos como texto plano, no html 
+
+        .para generar html, se utiliza la directiva v-html:
+
+        .si dentro de la etiqueta div tuvieamos escrito algun texto, seria reemplazado por el valor que posee la variable codigo 
+
+        .desoues veremos como crear bloques de codigo de otra manera.
+
 
 //CLASE N°2
 
@@ -118,7 +147,156 @@ Video:
 https://drive.google.com/file/d/1EZNAn8u8O59qX_6-DZ9u40dSASfMOLuh/view?pli=1
 
 
+CONTINUAMOS CON DIRECTIVAS:
+
+    -v-cloack --> se le agrega al elemento hasta que la instancia de Vue asociada finalice la compilacion
+
+        .Requiere usar reglas CSS como [v-cloak] { display:none}
+
+        .se usa para ocultar interpolaciones {{codigo}} sin compilar hasta que la instancia de Vue este lista. 
+
+    - v-pre --> Omite la compilacion para el elemento y todos sus elementos secundarios 
+
+        .sirve para mostrar mustaches sin procesar
+
+        .se se omiten grandes cantidades de nodos sin directivas se puede acelerar el proceso de compilacion 
+
+        .la variable existe, pero no la compilarar
+
+     .Los mustaches no se pueden utilizar dentro de los atributos HTML 
+
+     - v-bind --> Enlaza dinamicamente uno o mas atributos, o una propiedad de un componente a una expresion 
+
+        .por ejemplo si queremos enlazar imagen desde nuestra logica 
+
+        <img v-bind:src='imagen'>
+
+        sintaxsis abrebiada: 
+
+            :src 
+
+    MANIPULAR CLASES Y ESTILOS: 
+
+        .tanto los class como los style que usamos en html son atributos que podemos afectar desde Vue. 
+
+        .Por medio del v-bind podemos manejarlos, evaluando objetos o matrices 
+
+        .podemos pasar un objeto para poder asignar clases a un elemento.
+
+        .Tambien se peremite pasar un array para aplicar una lista de clases :
+
+            <p v-bind:class="[mal,error]"/>
+
+    - V-model --> Se aplica sobre elementos de tipo input,select y textarea. se debe aclarar el estado inicial desde las opciones de data.
+
+        <label v-bind:styles="booleano ?'background-color: green;', color: white;' : 'background-color: red;', color: white;'"> valor del checkbox:</label>
+    
+        .Cuando el checkbox se marque, la variable llamada booleano tendra valor true, y se aplicara el verde, si no se aplicara el rojo
 
 
+    RESUMIENDO: 
 
+        .Una aplicacion de Vue consiste en una instancia raiz de vue creada con el constructor new Vue 
+
+        .Puede estar organizada en un arbol de componentes anidados y reutilizables 
+
+        .Al crearse una instancia de Vue, se agregaran todas las propiedades encontradas en el objeto data al sistema de reactividad de Vue. 
+
+        .Cuando los valores de esas propiedades cambian, la vista "reaccionara" y se actualizara para coincidir con los nuevos valores. 
+
+        .La vista y el modelo se vinculan por medio de interpolaciones 
+
+        .permiten que los valores de las variables declaradas en el modelo se puedan vern en la vista
+        
+        . Las directivas otorgan nuevos comportamientos a los elementos del html 
+
+        .Podemos tener mas de una directiva afectando a un mismo elemento ..
+
+
+DIAPO 2 : 
+
+    Representacion Condicional:
+
+        .Podemos representar elementos y contenidos condicionalmente en funcion de atributos de datos o declaraciones de JavaScript 
+
+        .estos incluyen un v-if, para mostrar un contenedor si una declaracion equivale a verdadero y v-else, para mostrar una alternativa. 
+
+    v-if 
+
+        .se usa para representar condicionalmente un bloque 
+
+        .el bloque solo se representara si la expresion de la directiva devuleve un valor verdadero 
+
+        .en la logica debemos tener: 
+
+            var app = new Vue ({
+                el: "#contenedor",
+                data: {
+                    mensajito:"Mi super App en Vue",
+                    mostrar:true 
+                }
+            })
+
+            <p v-if="mostrar">texto si la variable es true</p>
+        
+        .Se puede usar v-id si queremos cambiar mas d eun elemento con <template>, este envoltorio una vez compilado no se vera en el codigo final. 
+
+            <template v-if="mostar">
+                <p>Esto se mostrara si la variable mostrar es true</p>
+                <p>Puedo tener mas estructura de codigo</p>
+
+            </template>
+        
+        .Esos parrafos no estan drentro de ninguna etiqueta html
+
+        v-if no solo funciona con valores booleanos verdadero/falso. puede verificar si una propiedad de datos es igual a una cadena especifica:
+
+        v-if="selected=='si'"
+
+        .el atributo v-if acepta operadores JS, por lo que puede verificar que no sea igual, mayo o menor que .
+
+    v-else 
+
+        .Permitehacer un elemento alternativo basado en lo contrario de la declaracion v-if 
+
+        .si eso da como resultado verdadero se mostrara el primer elemento, de lo contrario, el elemento que contiene v-else lo hara. 
+
+        .no tiene valor y se coloca dentro de la etiqueta del elemento 
+
+        .el elemento con v-else debe seguir directamente al que contiene v-if: de lo contrario la consola tirara error .
+
+            <p v-if="mostrar">Texto que se mostrará si la variable tiene valor TRUE</p>
+		    <p v-else>Texto que se mostrará si la variable tiene valor FALSE</p>
+            
+    v-else-if 
+
+        .si tenemos que encadenar condiciones podemos usar esta directiva 
+
+        .Debe seguir inmediatamente a un elemento v-if o v-else-if
+
+    v-if vs v-show 
+
+        .v-if es una renderizacion condicional "real" donde los elementos son destruidos y recreados durante la alternancia 
+
+        .v-if tambien es diferido; si la condicion es falsa en la representacion incial, no se hara nada 
+
+        .el bloque condicional no se procesara hasta que la ocndicion se convierta en true por primera vez 
+
+        . con v-show el elemento siempre se representara independientemente de la condicion inicial, con alternancia basada en css.
+
+        .La documentacion suguiere V-SHOW para cambiar algo muy a menudo y elegir v-if si es poco probable que la condicion cambie en ele tiempo de ejecucion 
+
+ITERAR ARRAYS: v-for 
+
+    .Permite representar una lista de elementos basada en una matriz. 
+    
+    .Requiere una sintaxis especial en forma de item in items.
+
+    .los items son la matriz de datos y el item es un alias para el elemento de matriz que se esta iterando
+       
+
+//CLASE N°3 
+
+video: 
+https://drive.google.com/file/d/1guXwhcFGgFHeKbxLvG8k-EytfQPV-A8D/view
 

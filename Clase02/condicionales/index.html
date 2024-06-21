@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<title>Condicionales</title>
+
+	<script src="scripts/vue.js"></script>
+	<style>
+		.red{color:red;}
+		.green{color:green;}
+		.malClass{text-decoration:line-through;}
+		.errorClass{background:red;color:white}
+		[v-cloak] { display: none;}
+	</style>
+</head>
+
+<body>
+	<div id="contenedor" v-cloak>
+		
+		<h1>{{mensajito}}</h1>
+
+		<div v-bind:class="mostrar ? 'green' : 'red' ">
+			<h1>V-if V-else (boolean)</h1>
+				<p v-if="mostrar">Texto que se mostrará si la variable tiene valor TRUE</p>
+				<p v-else>Texto que se mostrará si la variable tiene valor FALSE</p>
+
+		</div>
+
+		<div>
+			<h1>v-if (string-operadores de comparación)</h1>
+
+		<p v-if="selected == 'seleccionado'">Se ve !</p>
+
+		<p v-if="valor >= 9">El numero es mayor o igual a 9</p>
+		<p v-if="valor === 9">El numero es igual a 9</p>
+		<p v-if="valor != 10">El numero distinto a 10</p>
+		
+		</div>
+
+		<div>
+			<h1>V-if - v-else-if</h1>
+				<p v-if="evaluar == 1">Es igual a 1</p>
+				<p v-else-if="evaluar == 5">Es igual a 5</p>
+				<p v-else-if="evaluar == 15">Es igual a 15</p>
+				<p v-else-if="evaluar == 10">Es igual a : {{evaluar}}</p>
+				<p v-else>No coincide, el valor es : {{evaluar}}</p>
+
+		</div>
+
+		
+	<template v-if="mostrar">
+		<p>Esto se verá si la variable mostrar es true</p>
+		<p>Puedo tener mas estructura de código</p>
+	</template>
+
+	<div v-html="h1">
+	</div>
+
+</div>
+
+
+
+	<script src="scripts/app.js"></script>
+</body>
+</html>
