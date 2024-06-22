@@ -1,3 +1,13 @@
+:root{
+    --clr-primario-oscuro: #522073;
+    --clr-primario: #7021BF;
+    --clr-primario-claro: #8416F2;
+    --clr-secundario: #AFA3BF;
+    --clr-secundario-oscuro:#696273;
+    --clr-white: #F2F2F2;
+    --clr-black: #262626;
+}
+
 /* Eliminamos el margen y el padding predeterminado */
 * {
     margin: 0;
@@ -5,44 +15,66 @@
     box-sizing: border-box;
 }
 
+
 body {
     font-family: Arial, sans-serif;
+    background-color: var(--clr-black);
 }
+
 .navbar {
-    background-color: #343a40;
+    background-color: var(--clr-primario-oscuro);
+    height: 80px;
+    box-shadow: rgba(190, 28, 253, 0.1) 0px 13px 27px -5px, rgba(203, 40, 253, 0.06) 0px 8px 16px -8px;;
 }
-.navbar-brand {
-    color: white;
-    font-weight: bold;
-}
-.navbar-brand:hover {
-    color: #ddd;
-}
+
 .btn-contacto {
-    color: white;
-    background-color: #007bff;
-    border-color: #007bff;
+    font-weight: bold;
+    width: 150px;
+    color: var(--clr-primario-oscuro);
+    background-color: var(--clr-white);
+    border-color: var(--clr-secundario);
 }
+
 .btn-contacto:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    color: var(--clr-white);
+    background-color: var(--clr-secundario);
+    border-color: var(--clr-secundario);
 }
 main {
     padding: 20px;
     text-align: center;
 }
-.exercise-buttons {
-    margin-top: 20px;
+
+h1{
+    color: var(--clr-white);
+    font-weight: bold;
 }
+
 .exercise-buttons .btn {
     width: 100%;
+    background-color: var(--clr-primario);
+    border-color: var(--clr-primario-claro) ;
 }
+
+.exercise-buttons .btn:hover {
+    background-color: var(--clr-primario-oscuro);
+    border-color: var(--clr-primario-claro);
+}
+
 footer {
-    background-color: #343a40;
+    background-color: var(--clr-secundario-oscuro);
     color: white;
-    text-align: center;
-    padding: 10px 0;
+    height: 100px;
     position: fixed;
     width: 100%;
     bottom: 0;
+}
+
+footer h2{
+    color: #8416F2;
+    font-size: 1.5em;
+}
+
+footer p{
+    font-weight: 100;
 }
