@@ -1,0 +1,27 @@
+[v-cloak] {
+    display: none;
+}
+
+
+h2{
+    color: var(--clr-white);
+    margin-top: 1.2em;
+}
+
+label{
+    font-size: 1.2em;
+    
+}
+
+.amo{
+    color: var(--clr-primario);
+}
+
+.no_amo{
+    color: var(--clr-secondary);
+    text-decoration: line-through;
+}
+
+.drop_shadow{
+    filter: drop-shadow(0 0 25px rgba(83, 9, 126, 0.534));
+}

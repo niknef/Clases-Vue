@@ -19,6 +19,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: var(--clr-black);
+    color: var(--clr-white);
 }
 
 .navbar {
@@ -54,6 +55,7 @@ body {
     border-color: var(--clr-secundario);
 }
 main {
+
     padding: 20px;
     text-align: center;
 }
@@ -61,6 +63,12 @@ main {
 h1{
     color: var(--clr-white);
     font-weight: bold;
+}
+
+.ejercicio{
+    text-decoration: underline;
+    font-weight: normal;
+    text-align: left;
 }
 
 .exercise-buttons .btn {
@@ -77,10 +85,7 @@ h1{
 footer {
     background-color: var(--clr-secundario-oscuro);
     color: white;
-    
-    position: fixed;
     width: 100%;
-    bottom: 0;
     border-top: 1px solid var(--clr-primario);
 }
 

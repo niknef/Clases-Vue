@@ -1,0 +1,26 @@
+[v-cloak] {
+    display: none;
+}
+
+li {
+    list-style: none;
+}
+.consolas{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 5px;
+    align-items: center;
+}
+
+.consolas p{
+    width: 100%;
+    border: 1px solid var(--clr-primario);
+    border-radius: 5px;
+}
+
+.juegos{
+    display: flex;
+    gap: 1.5em;
+    justify-content: space-around;
+}

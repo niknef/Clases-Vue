@@ -6,6 +6,7 @@
     <title>Ejercicio 1</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="./css/styles.css">
     <script src="../../scripts/vue.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
 </head>
@@ -25,8 +26,36 @@
 
 <!-- Main Content -->
 <main>
-    <h1 class="mt-4">Ejercicio 1</h1>
+    <h1 class="mt-4 ejercicio">Ejercicio 1:</h1>
     
+    <!-- Ejercicio 1 -->
+    <!--Creamos un div con la clase contenedor relaccionada a nuestro vue, 
+    se le agrega el v-cloack para que no se muestre si no cargo todo-->
+    <div class="contenedor" v-cloak>
+        <!--Llamamos al title, agreamos la directiva v-once ya que lo cargaremos una sola vez-->
+        <h1 v-once class="mt-3">{{title}}</h1>
+
+        <!--Creamos una imagen usamos la abreviacion de v-bind para llamar el src y el alt-->
+        <img :src="imagen_mario" :alt="alt" class="img-fluid mt-3 rounded" style="max-width: 450px;">
+
+        <!--Agregamos el h2 con la directiva v-html-->
+        <div v-html="h2_mario"></div>
+
+        <p class="text-start">¡Araña y trepa a través de docenas de coloridos niveles! Mario y sus amigos pueden utilizar una variedad de mejoras como la supercampana, que otorga habilidades felinas como trepar y arañar. Forma un equipo con hasta tres jugadores más en el modo local o en línea para completar el objetivo y ver quién obtiene el puntaje más alto.</p>
+
+        <!--Agregamos h2 mediante interpolacion-->
+        <h2>{{h2_bowser}}</h2>
+
+        <p class="text-start">¡El estilo de juego de libre exploración de Super Mario regresa en esta nueva aventura en la que Bowser es gigantesco y ha perdido el control! Viaja hacia el Mar de los Zarpazos y sus islas, completa objetivos para conseguir soles felinos y únete a Bowser Jr. para ayudarle a devolver al maloso de su papá a su tamaño normal. Pero no pierdas de vista los ataques de Bowser por todas las islas.</p>
+
+        <!--Agregamos un :class con un ternario que nos va a permitir alternar las clases segun datazo
+        v-model para alternar el parametro datazo 
+        v-show para mostrar o ocultar la imagen-->
+        <label :class="datazo ? 'amo' : 'no_amo'">Amo a Mario:<input class="ms-2" type="checkbox" v-model="datazo"></label>
+        <div>
+            <img class="drop_shadow my-4" v-show="datazo" src="img/35_aniversario.png">
+        </div>
+    </div>
 </main>
 
 <!-- Footer -->
@@ -45,7 +74,7 @@
         </div>
     </div>
 </footer>
-
+<script src="./scripts/app.js"></script>
 <!-- Bootstrap JS (Optional for Bootstrap components) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>

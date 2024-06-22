@@ -6,6 +6,7 @@
     <title>Ejercicio 2</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="./css/styles.css">
     <script src="../../scripts/vue.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
 </head>
@@ -25,7 +26,33 @@
 
 <!-- Main Content -->
 <main>
-    <h1 class="mt-4">Ejercicio 2</h1>
+    <h1 class="mt-4 ejercicio">Ejercicio 2:</h1>
+
+    <div class="contenedor" >
+        <h2>Juegos Retro</h2>
+        <p>Nuestra lista es exigente con las calificaciones, solo te mostraremos juegos que tengan una calificacion mayor a 6 y resaltaremos las super recomendadas que tengan calificación de 8 en adelante.</p>
+        
+        <ul class="juegos my-5">
+            <li v-for="item in juegos" v-if="item.calificacion > 6">
+                <div class="card" style="width: 16rem;">
+                    <img :src="item.portada" class="card-img-top" :alt="item.alt">
+                    <div class="card-body">
+                      <h3 class="card-title">{{item.nombre}}</h3>
+                    </div>
+                    <div class="consolas">
+                      <p v-for="x in item.consola">{{x}}</p>
+                    </div>
+                    <div class="card-body">
+                        <p>Calificación: </p>
+                        <div class="progress" role="progressbar" aria-label="Success example" :aria-valuenow="item.calificacion" aria-valuemin="0" aria-valuemax="10">
+                            <div :class="['progress-bar', item.calificacion >= 8 ? 'bg-success' : 'bg-danger']" :style="{ width: (item.calificacion * 10) + '%' }">{{item.calificacion}}</div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
     
 </main>
 
@@ -46,6 +73,7 @@
     </div>
 </footer>
 
+<script src="./scripts/app.js"></script>
 <!-- Bootstrap JS (Optional for Bootstrap components) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
