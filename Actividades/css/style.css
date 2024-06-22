@@ -26,6 +26,19 @@ body {
     height: 80px;
     box-shadow: rgba(190, 28, 253, 0.1) 0px 13px 27px -5px, rgba(203, 40, 253, 0.06) 0px 8px 16px -8px;;
 }
+.btn-volver {
+    font-weight: bold;
+    width: 150px;
+    color: var(--clr-white);
+    background-color: var(--clr-primario-oscuro);
+    border-color: var(--clr-white);
+}
+
+.btn-volver:hover {
+    color: var(--clr-primario-oscuro);
+    background-color: var(--clr-white);
+    border-color: var(--clr-primario-oscuro);
+}
 
 .btn-contacto {
     font-weight: bold;
@@ -64,10 +77,11 @@ h1{
 footer {
     background-color: var(--clr-secundario-oscuro);
     color: white;
-    height: 100px;
+    
     position: fixed;
     width: 100%;
     bottom: 0;
+    border-top: 1px solid var(--clr-primario);
 }
 
 footer h2{
