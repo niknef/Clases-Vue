@@ -293,10 +293,366 @@ ITERAR ARRAYS: v-for
     .Requiere una sintaxis especial en forma de item in items.
 
     .los items son la matriz de datos y el item es un alias para el elemento de matriz que se esta iterando
+
+
+        <ul> 
+            <li v-for="item in peliculas">{{item}}</li>
+        </ul> 
        
+
+       <ul> 
+            <li v-for="item in peliculas">{{item.nombre}}:{{item.anio}}</li>
+        </ul> 
+
+        .se puede usar una etiqueta <template> con v-for para renderizar un bloque con varios elementos
+
+        <ul> 
+            <template v-for="x in peliculas">
+                <li>{{x.nombre}}</li>
+                <li>{{x.anio}}</li>
+            </template>
+        </ul>
+
+        .dentro de los bloques v-for tenemos acceso completo a las propiedades del ambito principal.
+
+        .v-for admite un segundo argumento opcional para el indice del elemento actual 
+
+        <ul>
+            <li v-for="{item.index}in juegos">Indice: {{index}}, {{item.nombre}}, {{item.anio}}</li>
+        </ul>
+
+        .puede usar of como delimitador en lugar de in. de modo que este mas cerca de la sintaxis de JS para los iteradores:
+
+
+        <ul>
+            <li v-for="item of juegos">{{item.nombre}}, {{item.anio}}</li>
+        </ul>
+
+        <ul>
+            <li v-for="value of obj">{{value}}</li>
+        </ul>
+
+        .en caso de querer mostrar tambien las propiedades de los objetos podemos usar el segundo argumento key.
+
+        <ul>
+            <li v-for="(valor,key) of obj">{{key}}:{{valor}}</li>
+        </ul>
+
+        .ademas podriamos pasarle un tercer argumento para mostrar el indice del elemento 
+
+        <ul>
+            <li v-for="(valor,key,index) of obj">{{index}}--> Clave: {{key}}, valor: {{valor}} </li>
+        </ul>
+
+        . al iterar sobre un objeto, el orden se basa en el orden de enumeracion de las claves (puede que no sea ocnsistente con todas las implementaciones del motor de js )
+
+        .podemos sugerirle a Vue un atributo key unico para cada elemento para que pueda rastrear la ideantidad de cada nodo y reordenarla y reutilizar los elementos existentes.
+
+        .tenemos que usar v-bind para enlazarlo v-bind:key
+
+        .se recomienda que si use el atributo key al usar v-for para aprovechar el rendimiento vue.
+
+            <ul>
+                <li v-for = "item in lista" :key="item.id"> {{item.tarea}}</li>
+            </ul>
+
+        V-FOR en combinacion con V-IF (no se recomienda )
+
+            .Cuando existe en el mismo elemento v-for tiene mas propiedad
+        
+            .v-if se ejecutara en cada iteracion del bucle por separado 
+            
+            .util cuando tenemos que representar nodos solo para algunos elementos
+
+                <li v-for="item in lista" v-if="!item.estado"> {{item.tarea}} </li>
+
+            .esto solo nos mostrara las tareas que tengan estado en false, es decir, que todavia falta realizar 
+
+        Datos complejos:
+            se necesita hacer doble iteracion 
+
+                <li v-for="item in datos_complejos" :key="item.id" >{{item.tarea}}</li>
+                <span v-for="x in item.elementos"> {{x}}</span>
+
 
 //CLASE N°3 
 
 video: 
 https://drive.google.com/file/d/1guXwhcFGgFHeKbxLvG8k-EytfQPV-A8D/view
+
+
+DIRECTIVA V-ON:
+
+    -Se utiliza para vincular eventos a un boton, formulario o input o en cualquier cosa. 
+
+        v-on:nombreEvento= "metodo"
+
+    -nombreEvento = puede ser cualquier cosa. puede ser evento de click, evento de tipo mouseover, evento de keypress, focus, etc 
+
+    -esto une los eventos a un formulario, boton o cualquier etiqueta (parrafo, encabezado, div, etc)
+
+        <div v-on:click="mostrar">
+            <p>Mostrar</p>
+        </div>
+
+    -Es muy importante tener presente que cualquier variable, o metodo que pongamos en el html, debe estar declarado en el codigo de nuesta app contraio la consola arrojara error. 
+
+    -desde la logica tendremos dentro de la instancia de vue una propiedad llamada methods.
+
+    -dentro, crearemos las funciones, es decir tantos metodos como queramos separados por comas.
+
+
+        methods: {
+            guardar: function(){},
+            editar: function(){}
+        }
+
+        <form v-on:sumbit="guarda">
+        <button>guardar</button>
+        </form>
+
+    -en el caso de ser un form, el comportamiento al enviar el mismo es recargar la pagina
+
+    -vue posee modificadores para los eventos 
+
+    -despues del envento se coloca punto y el modificador deseado 
+
+        <form v-on:sumbit.prevent="guardar"> (no se recarga la pagina)
+
+
+    -cuando usamos la directiva v-bind para pasar ´por argumento atributos de etiquetas podiamos usar el atajo:
+
+    -si queremos usar la directiva v-on podemos usar el atajo @
+
+        <p @click="mostrar">ver</p>
+
+MODIFICADORES DE TECLAS:
+
+    -cuando queremos escuchar eventos del teclado, podemos mediante el keycode asignar un evento
+
+    -podriamos asignar keyup(se dispara cuando el usuario deja de presionar una tecla) si el usuario presiona una determinada tecla
+
+    -la funcion enviar se ejecutara cuando el usuario suelta la tecla enter, en este caso pasando su keycode 
+
+        <input v-on:keyup.13="enviar" type="text" v-model="dato"/>
+
+    .https://keycode.info/ --> presionan la tecla del teclado que quieren averiguar su keycode y te lo devuelve
+
+    -vue ofrece poder trabajar con aliar para las teclas mas utilizadas
+
+ENLACE DE DATOS DE 2 VIAS: 
+
+    -Cuando trabajamos con formularios tenemos que tener presente como vamos a tratar los datos.
+
+    -hay un concepto fundamental en vueJs que tiene que vert con el enlace de datos.
+
+    -hasta ahora vimos como los datos inicializados desde el modelo, se mostraba en la vista 
+
+    -para que el enlace de datos de 2 vias ocurra necesitamos la participacion del usuario.
+
+    -con la directiva v-model podemos crear enlace de datos bidireccionales.
+
+    -se usa un elementos de tipo input, textarea y select en formularios 
+
+    -la directiva busca automaticamente la manera correcta de actualizar el elemetno segun el tipo de entrada.
+
+    -al usar el v-model, le decimos a vue que variable debe unirse con esa entrada, en este caso mensaje.
+
+        <input type="text" v-model="mensaje"/>
+            <p>{{mensaje}}</p>
+
+
+        data:{
+            mensaje:"Mensajito",
+        }
+
+    -el enlace de datos bidireccional significa que si cambia el valor de un modelo en su vista, todo se mantendra actualizado 
+
+MANIPULAR DATOS:
+
+    -Los formularios son un medio efectivo para lograr interaccion con el usuario
+
+    -si queremos que el usuario ingrese datos e ir mostrandoselos a medida qeu lo hace tenemos que resolver la estructura que poseeera esa info
+
+    -por empezar, tener presente que las variables deben inicializarse dentro de data.
+
+    -y las funciones que creermos, dentro de la propiedad methods
+
+        var aoo = new Vue({
+            el:".contenedor",
+            data:{
+                mensaje:"hola",
+                lista:[],
+            },
+            methods:{
+                agregar:function(){
+                    agregar: function(){
+                        this.lista.push(this.mensaje);
+                        this.mensaje="";
+                    }
+                }
+            }
+        })
+
+    -partimos de un dato inicializado desde el modelo, vamos a agregar cada mensaje nuevo que el usuarui escriba.
+
+    -para poder acceder a las propiedades del objeto data desde las fuciones, tenemos que usar this 
+
+    -por medio del metodo push vamos a ir agregandolos al array lista 
+
+    <form v-on:submit.prevent>
+        <input type="text" v-model="mensaje" @keyup.13="agregar"/>
+    </form>
+        <p>Enlace de datos de 2 vias: {{mensaje}}</p>
+
+    <ul>
+        <li v-for="(item,index) in lista"> {{item}}</li>
+    </ul>
+
+    -si queremos lograr mas interaccion y que el usuario pueda borrar los datos que fue ingresado, necesitamos crear otra funcion y desde la vista un boton asociado a la misma funcion 
+
+        <li v-for="(item, index) in lista"> {{item}}
+            <button @click="borrar(index)">borrar</button>
+        </li>
+
+    -cada vez que escibamos una funcion, dentro de la propiedad methods cada funcion debe estar separada por coma 
+
+SPLICE
+    -el metodo splice nos permite elegir el elemento del array que querramos eliminar, (index) como segundo argumento le indicamos cuantos a partid del numero del index (en este caso ese elemento solo)
+
+    borrar: function(index){
+        this.lista.splice(index,1)
+    }
+
+    -una vez eliminado del elemento Dos, los elementos que queda aun enm el array se seguiran mostrando.
+
+    -si queremos verificar que el usuario ingresa un dato y no guarda un elemento vacio 
+
+    data: {
+        mensaje"",
+        verificar:true 
+    }
+
+    .si la variable esta vacia, cambiamos el valor de la variable verificar a false 
+
+    .caso contrario verificar es true, y podemos hacer push 
+
+    methods:{
+        agregar:function(){
+            if(this.mensaje == ""){
+                this.verificar = false
+            }else{
+                this.verificar = true
+                this.lista.push(this.mensaje);
+                this.mensaje"";
+            }
+        }
+    }
+
+
+    <div class="error" :class"verificar ? 'classBien' : 'classError'">
+        <p>No puede quedar vacio</p>
+    </div>
+
+    El mensaje solo se le mostrar al usuario en caso de soltar el enter y el input no tenga contenido.
+
+CUANTOS ELEMENTOS FUE INGRESANDO EL usuario
+
+    -Desde el objeto data podemos inicializar una variable total en 0 
+
+    -a medida que se haga el push espablecer que el valor del total va a ser el lenght de lo que tenga el array lista 
+
+        this.total = this.lista.lenght
+
+    -cuando el usuario borre algun elemento deberiamos ir restando del valor de total.
+
+        borrar: function(index){
+            this.lista.splice(index,1)
+            this.total -- 
+        },
+
+        <p>datos ingresados {{total}}</p>
+
+LISTA DE ELEMENTOS SELECCIONABLE
+
+    -por defecto el susuario ingresa tareas pendientes, asocuadas a una clase "pendientes"
+
+    - y si selecciona alguna cambiamos la clase a "terminadas"
+
+    -en este caso vamos crear un objeto que contenga dos propiedades mensaje y css
+
+    -cuando el usuario vata cargando las neuvas tareas iremos haciendo push de estos objetos array lista 
+
+        <li v-for="(item, index)in lista " :key="index" :class="item.css">
+            <span @click="toggle(index)">{{item.mensaje}}, indice: {{index}}</span>
+                <button @click="borrar(index)">Borrar</button>
+        </li>
+
+        :class="item.css --> lo definiremos con la clase pendientes cada vez que el usuario agregue un elemento 
+
+        desde la logica:
+
+            toggle: function(index){
+                if(this.lista[index].css =="pendientes"){
+                    this.sumarTerminadas ++; //sumara y su css pasara a terminados
+                    this.lista[index].css= 'terminadas'
+
+                }else{
+                    this.sumarTerminadas --; //restara y su css pasara a pendientes 
+                    this.lista[index].css = 'pendientes'
+                }
+            }
+
+    this.lista[index] --> nos va a permitir afectar a la posicion de este elemento que le estamos danto click 
+
+FILTROS
+
+    -En sus primeras versiones el core de vue tenia incorporadoun recurso muy util para la muestra de informacion 
+
+    -actualmente la version 2 no la trae dentro de sus funcionalidades basicas.
+
+    -vuejs nos premite crear nuestros propios filtros 
+
+        filters: {
+            mayuscula:function(value){
+                if(!value) return ''
+                value = value.toString()
+                return value.charAt(0).toUpperCase() + value.slice(1)
+            }
+        }
+
+    charAt(0) selecciona el primer carracter de la cadena 
+
+    toUpperCase() la pasamos a mayuscula 
+
+    slice () obtenemos el resto de la cadena ( desde el segundo caractar, indice 1, hasta el final de la cadena)
+
+    -hay varios desarrollados para incorporar dentro de nuestros proyectos. 
+
+    -https://github.com/freearhey/vue2-filters, ofrece una coleccion de filtros.
+
+    -para poder incorporarlo a nuestro proyecto necesitamos agregar un archivo
+
+    <script src="vue2-filters.min.js"></script>
+
+    -cualquier recurso que dependa de vue js, siempre va debajo de la etiqueta script que lo incorpora, si no tira error
+    
+    -los filtros solo cambian la representacion del dato, no cambia el dato original 
+
+    -losfiltros pueden usarse dentro de las interpolaciones y en la directiva v-bind
+
+    -dentro de la interpolacion se usa pipe y luego el nombre del filtro que queremos aplicar
+
+        <p> {{mensaje | nombreFiltro}} </p>
+
+    -funcionalidades basicas que podemos obtener: 
+
+        -mayusculas
+        -primer letra mayo
+        -minuscula
+        -colocar texto por defecto si -la variable no lo tiene
+        -mostrar un numero de -caracteres 
+        -numeros
+        -moneda
+        -etc
 

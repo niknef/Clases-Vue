@@ -29,21 +29,35 @@
     <h1 class="mt-4 ejercicio">Ejercicio 2:</h1>
 
     <div class="contenedor" >
+        <!--Agregamos contenido plano-->
         <h2>Juegos Retro</h2>
         <p>Nuestra lista es exigente con las calificaciones, solo te mostraremos juegos que tengan una calificacion mayor a 6 y resaltaremos las super recomendadas que tengan calificación de 8 en adelante.</p>
         
         <ul class="juegos my-5">
+            <!-- una lista que va a iterar en juegos creando un item por cada juego
+             ademas vamos a utilizar un v-if para solo mostrar los item que su propiedad clasificacion que su calificacion sea mayor a 6-->
             <li v-for="item in juegos" v-if="item.calificacion > 6">
                 <div class="card" style="width: 16rem;">
+                    <!--Agregamos la imagen con v-bind:src y v-bind:alt-->
                     <img :src="item.portada" class="card-img-top" :alt="item.alt">
+
                     <div class="card-body">
+                        <!--Agregamos con {{}} el nombre del juego-->
                       <h3 class="card-title">{{item.nombre}}</h3>
                     </div>
+
                     <div class="consolas">
-                      <p v-for="x in item.consola">{{x}}</p>
+                        <!--volvemos a iterar dentro de la lista de consola y imprimos con {{}}-->
+                        
+                        <p v-for="x in item.consola">{{x}}</p>
                     </div>
+
                     <div class="card-body">
                         <p>Calificación: </p>
+                        <!-- Aca la complicamos ya que vamos a mezclar datos y clases de boostrap junto a las de nuestro css y Vue:
+                         Vamos a utilizar la barra de progreso de boostrap y sus clases bg-success y bg-danger para darle los colores
+                         luego hacemos un operador ternario para que alterne entre las clases
+                         segun si la clasificacion es mayor o igual a 8 -->
                         <div class="progress" role="progressbar" aria-label="Success example" :aria-valuenow="item.calificacion" aria-valuemin="0" aria-valuemax="10">
                             <div :class="['progress-bar', item.calificacion >= 8 ? 'bg-success' : 'bg-danger']" :style="{ width: (item.calificacion * 10) + '%' }">{{item.calificacion}}</div>
                           </div>

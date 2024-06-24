@@ -1,0 +1,83 @@
+[v-cloak] { 
+    display: none;
+}
+.contenedor{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#nav-flotante{
+    margin-top: 1em;
+    border-radius: 10px;
+    width: 70vw;
+    background-color: var(--clr-secundario);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#nav-flotante ul{
+    margin: 1em;
+    padding: 0;
+    
+}
+
+#nav-flotante li{
+    list-style: none;
+    display: inline;
+    
+}
+
+#nav-flotante a{
+    margin: 0em 1em;
+    padding: 0.5em 1.5em;
+    color: var(--clr-white);
+    text-decoration: none;
+    font-size: 1.2em;
+    border: 1px solid var(--clr-primario);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.activa{
+    background-color: var(--clr-primario);
+}
+
+h1{
+    margin: 1em 0;
+}
+
+input{
+    margin-top: 2em;
+    width: 40vw;
+    border-radius: 5px;
+    height: 40px;
+}
+
+.drop_shadow{
+    filter: drop-shadow(0 0 25px rgba(83, 9, 126, 0.534));
+}
+
+
+.juego, .juego li{
+    width:60vw;
+    text-align: left;
+    padding:20px;
+    cursor: pointer;
+}
+
+.noamo{
+    background:url(../img/no_fav.png) no-repeat left center; 
+    padding: 15px 5px 10px 60px;
+    color:var(--clr-white);}
+
+.amo{
+    color:var(--clr-primario); 
+    background:url(../img/fav.png) no-repeat left center; 
+    padding: 15px 5px 10px 60px;
+}
+
+span{
+    color: var(--clr-secundario);
+}

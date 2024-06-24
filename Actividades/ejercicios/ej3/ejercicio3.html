@@ -6,7 +6,9 @@
     <title>Ejercicio 3</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="./css/styles.css">
     <script src="../../scripts/vue.js"></script>
+    <script src="../../scripts/vue2-filters.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
 </head>
 <body>
@@ -25,7 +27,42 @@
 
 <!-- Main Content -->
 <main>
-    <h1 class="mt-4">Ejercicios 3</h1>
+    <h1 class="mt-4 ejercicio">Ejercicios 3:</h1>
+
+    <div class="contenedor">
+            
+        <nav id="nav-flotante">
+            <ul>
+                <li v-for="(links, index) in menu" :key="index">
+                    <a href="#" :class="links.clase" @click="activo(index)">{{ links.link }}</a>
+                </li>
+            </ul>
+        </nav>
+
+        <h1>Juegos {{categoriaActiva | capitalize}}</h1>
+
+        <img class="drop_shadow" src="./img/35_aniversario.png" alt="35 aniversario mario">
+
+        <!--Utilizamos el v-on para enviar y ademas agregamos el prevent para evitar que se recargue la pagina-->
+        <form v-on:submit.prevent>
+            <!--El v-model lo utilizamos para que se vaya cargando lo que pone el usuario, y el @click:guardar llamamos a la funcion guardar cuando le damos click-->
+            <input type ="text" v-model="jueguito" />
+            <button @click="guardar" class="btn btn-secondary">Guardar</button>
+        </form>
+        
+        <ul class="list-group my-4" >
+            <!-- Iteración de juegos en el array games -->
+            <li v-for="(item,index) in games" :key="index" class="list-group-item juego bg-dark" v-if="item.anio < 2020">
+                 <!-- Muestra el nombre del juego y el año, aplicando una clase condicionalmente -->
+                <span :class="item.clase" @click="preferido(index)">{{item.nombre | uppercase}} : {{item.anio}} </span>
+				<!-- Itera sobre las consolas del juego y las muestra -->
+				<span v-for="x in item.consola">{{x}}</span> 
+            </li>
+            
+          </ul>
+    
+        </div>
+
     
 </main>
 
@@ -46,6 +83,7 @@
     </div>
 </footer>
 
+<script src="./scripts/app.js"></script>
 <!-- Bootstrap JS (Optional for Bootstrap components) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
