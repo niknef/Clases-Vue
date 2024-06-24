@@ -656,3 +656,167 @@ FILTROS
         -moneda
         -etc
 
+CLASE N°4 :
+
+https://drive.google.com/file/d/11REg6NfR7CkMryLAVA8Yso5gc6eQ96fi/view
+
+COMPONENTES
+
+    .Como la mayoria de los frameworks actuales, el desarrollo de las funcionalidades de una app o sistema se basa en el concepto de componentes 
+
+    .los componentes son una de las caracteristicas mas destacadas de Vue.js
+    
+    .Un componente es una instancia reutilizable 
+
+    .permiten extender elementos HTML basicos para encapsular codigo 
+
+    .Son elementos personalizados a los que el compilador de Vue.js asociara un comportamiento especifico.
+
+    -UN COMPONENTE es un elemento de la interfaz del programa que tiene su propio contenido, sus propios datos y su propio comportamiento
+
+    .para usar un componente tenemos que registrarlo primero 
+
+    .se usa el metodo Vue.component y pasar la etiqueta y el constructor 
+
+    .la etiqueta sera el nombre del componente y el constructor las opciones del mismo 
+
+    -Recibe un string con el nombre de nuestro componente, que sera el nombre que tendra el elemento del Dom, y un objeto de configuracion que contendra el nombre de las props. el template, datos, metodos, etc 
+
+        Vue.component('mi-componente',{
+            //opciones
+        })
+
+    Se recomienda usar la nomenclatura "kebab-case" que todo minuscula, separado con "-"
+
+    .Adicionalmente, Vue recomienda que todos los componentes que creen tengan al menos 2 palabras 
+
+    .Esto se debe a que en html las etiquetas van a ser de una sola palabra.
+
+    .asi nos aseguramos evitar conflictos 
+
+    .una vez registrado, un componente puede ser utilizado en el html como un elemento personalizado <mi-componente></mi-componente>
+
+        <div class="contenedor">
+            <mi-componente></mi-componente>
+        </div>
+
+    .Los componentes van a tener, como minimo, una propiedad "template" que contenga el template en html, icluyendo las directivas de Vue u otros componentes que use. 
+
+        una vez registrado el componente debemos crear la instancia principal de vue
+    
+    Vue.component('mi-componente',{
+        template: '<div><h1>Esto es un mensaje desde un componente</h1></div>'
+    });
+
+    var app = new Vue ({
+        el:".contenedor",
+    })
+
+    .Si examinamos el codigo de la consola, renderiza el componente como si estuviera escrito directamente en el html 
+
+    .desde la opcion de Vue Devtools, en la consola
+
+    .el componente es hijo de la instancia principal 
+
+    .Estos componentes se registran a nivel global, por lo tanto hay que tener presente:
+
+        -todos los componentes deben tener un nombre unico
+        -Todos los componentes estan disponibles en todas partes de nuestro codigo js 
+
+
+PROPIEDAD TEMPLATE 
+
+    -Nos permite determinar un bloque de codigo html con las funcionalidades que nosotros asignemos 
+
+    -dentro de todas las formas que se pueden implementar vamos a mensionar 2.
+
+        1_ Podemos crear el template de un componente con comillas simples o dobles: 
+
+            Vue.component('mi-componente',{
+                template:'<div><h1>Dato desdeun componente</h1></div>
+            })
+
+            .no permite el uso de enter ni tabular el codigo 
+        
+        2_ con backticks, comillas oblicuas, permite insertar enters e indentacion 
+
+            .ctrl + alt + } o alt+96 
+
+            .RESTICCION: Debe terner un unico elemento raiz, caso contrario arroja error en la consola 
+
+PROPIEDAD DATA :
+
+    -La opcion data de un componente debe ser una funcion, de modo que cada instancia pueda mantener una copia independiente del objeto de datos devuelto:
+
+    -Los componentes que creamos son reutilizables, por lo tanto los podemos usar varias veces 
+
+ATRIBUTOS PROPS: 
+
+    -sirven para pasar parametros o informacion al propio web component para poder personalizarlo y ajustarlo dependiendo de las necesidades.
+
+    .El objetivo de crear un componente es recibir informacion
+     
+    .las props son atributos personalizadosque podemos registrar en un componente 
+
+    .Cuando se pasa un valor a un atributo prop, se convierte en una propiedad en esa instancia de componente 
+
+    .un componente puede tener varias props, se puede pasar cualquier prop de forma predeterminada
+
+    .es una bunea practiva escribir las props con camelCase
+
+    Vue.component('componente-props', {
+        data: function(){
+            return{
+                edad:34
+            }
+        },
+        props:['nombre'],
+        template: `<div>
+            <h1>{{nombre}}: {{edad}}</h1>
+            </div>
+        `
+
+    })
+
+    <componente-props v-bind:nombre="nombre"></componente-props>
+
+    -esto nos permite que nuestro componente muestre el nombre declarado en la instancia 
+
+    -en caso de querer generar componentes de manera dinamica 
+    
+    -es probable que estos datos vengan de algun lugar
+    
+    -en nuestro caso tenemos creado la instancia en un array de objetos llamados articulos
+
+    .cada articulo es un object y tiene varias propiedades: id, titulo, favorito, texto, img, alt 
+
+    -desde nuestro componente llamado componente-multilinea vamos a pasar las propiedades hacia el atributo props como un array 
+
+    Vue.component('componente-multilinea', {
+        props:['titulo','texto','img','id', 'alt'],
+        template: `<div class="articulos">
+            <h1>{{titulo}}</h1>
+            <p>{{texto}}</p>
+            <img :src'img' :'alt'>
+            </div>
+        `
+
+    })
+
+    -desde nuestra vista vamos a tener que iterar el array de articulos y vamos a generar por cada uno, un componente con datos distintos 
+
+    <componente-multilinea v-for="x in articulos">
+
+    -por cada iteracion vamos a crear un atributo y mostrar la propiedad del objeto que deseamos pasarle al componente 
+
+    -por medio del atributo key, facilitamos a vue el trabajo de la iteracion ante modificaciones de elementos 
+
+    -con v-id evaluamos si el valor del favorito es tru, caso contrario lo retirar del dom el articulo 
+
+        v-if="x.favorito===true"
+    
+    -con :class vamos a manipular la aplicacion de clases para cada componetne dependiendo si su id es par o impar 
+
+        :class="x.id %2==1 ? 'lavanda' : 'coral'"
+    
+    -desde la consola, el panel de Vuejs podremos ver cada componente creado y las respectivas propiedades de cada elemento .
