@@ -1,0 +1,14 @@
+body{font-family:verdana;}
+.contenedor{margin:auto; width:1000px;}
+h1{text-align: center;}
+form{margin:auto;width: 800px;background:#FFA07A;}
+button{background:DodgerBlue;color:white; border:none;width:250px;padding:10px; margin:20px; }
+.ver{ padding:30px;}
+.form div{padding:15px;}
+label, input[type="text"], input[type="number"], textarea,select{
+	width:700px;display:inline-block;margin:5px 20px; color:black;text-align: left; }
+label{color:white;}
+textarea{resize:none;}
+input[type="text"]{color:grey}
+select{margin:10px 20px;}
+li{list-style: none;}

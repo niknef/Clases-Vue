@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<title>Ejemplos</title>
+
+	<script src="scripts/vue.js"></script>
+	<script src="scripts/vue2-filters.js"></script>
+	<style>
+		[v-cloak] { display: none;}
+	</style>
+</head>
+
+<body>
+	<div class="contenedor" v-cloak>
+		
+	<div>
+				
+				<p>{{texto | uppercase}}</p>
+
+				<p>{{texto | lowercase}}</p>
+
+				<p>{{texto | capitalize}}</p>
+
+				<p>{{texto | capitalize({ onlyFirstLetter: true })}}</p>
+								
+				
+				 <p>{{dato | placeholder('Dato nuevo') }} </p>
+				 
+				 <p>{{texto | truncate(3) }} </p>
+
+				 <p> {{123456 | number('0,0') }}</p>
+				 
+				 <p>{{4000.6 | number('0.000')}}</p>
+
+				 <p>{{ 123456 | number('-0') }} </p>
+
+				<p>{{ 123500 | number('0a') }}</p>
+
+				<p>{{ 4000700 | number('0a') }}</p>
+
+				<p>{{ 4000000 | number('0,0' , { thousandsSeparator: '.'}) }}</p>
+
+				<p>{{ 4000000 | number('0.00' , { decimalSeparator: ','}) }} </p>
+
+
+
+</div>
+
+</div>
+
+	<script src="scripts/app.js"></script>
+</body>
+</html>

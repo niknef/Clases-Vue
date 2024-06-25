@@ -6,7 +6,9 @@
     <title>Ejercicio 4</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="./css/styles.css">
     <script src="../../scripts/vue.js"></script>
+    <script src="../../scripts/vue2-filters.js"></script>
     <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
 </head>
 <body>
@@ -25,7 +27,15 @@
 
 <!-- Main Content -->
 <main>
-    <h1 class="mt-4">Ejercicio 4</h1>
+    <h1 class="mt-4 ejercicio">Ejercicio 4:</h1>
+
+    <div class="contenedor" v-cloak>
+        <!--Llamamos a nuestro primer componete con props pendientes-->
+        <primer-encabezado v-bind:pendientes="pendientes"></primer-encabezado>
+        <!--Llamamos a nuestro segundo componete-->
+		<form-datos></form-datos>
+    </div>
+    
     
 </main>
 
@@ -45,7 +55,7 @@
         </div>
     </div>
 </footer>
-
+<script src="./scripts/app.js"></script>
 <!-- Bootstrap JS (Optional for Bootstrap components) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>

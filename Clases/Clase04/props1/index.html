@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<title>Ejemplos</title>
+
+	<script src="scripts/vue.js"></script>
+	
+	<link rel="stylesheet" href="css/estilos.css" />
+</head>
+
+<body>
+	<div class="contenedor" v-cloak>
+
+
+	<componente-props v-bind:nombre="nombre" v-bind:apellido="apellido"></componente-props>
+			
+			<!--n % 2 == 1(es impar)-->
+
+			<componente-multilinea v-for="x in articulos" v-if="x.favorito === true"
+				v-bind:key="x.id"
+				v-bind:class="x.id  %2==1 ? 'lavanda' : 'coral'" 
+				v-bind:titulo="x.titulo"
+				v-bind:id="x.id"
+  				v-bind:texto="x.texto" 
+  				v-bind:img="x.img"
+  				v-bind:alt="x.alt">
+  			</componente-multilinea>
+
+
+
+
+
+</div>
+
+	<script src="scripts/app.js"></script>
+</body>
+</html>

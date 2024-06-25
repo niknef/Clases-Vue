@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8" />
+	<title>Ejemplos</title>
+
+	<script src="scripts/vue.js"></script>
+	
+	<style>
+		[v-cloak] { display: none;}
+		ul li span{width:200px;display: inline-block}
+		input{width: 200px;}
+	</style>
+</head>
+
+<body>
+	<div class="contenedor" v-cloak>
+	<h1>Enlace de datos bidireccional</h1>
+	<div>
+		<form v-on:submit.prevent>
+			<input type ="text" v-model="mensaje" @keyup.enter="agregar"/>
+		</form>
+			
+		<p> Enlace de datos de 2 vias: {{mensaje}}</p>
+
+	
+	<ul> <!--Ejecutando la función agregar, cada vez que el usuario presione enter el mensaje lo vamos agregando por medio del push al array lista-->
+		<li v-for="(x, index) in lista"><span>{{x}} --> {{index}} </span>
+			<button @click="borrar(index)">Borrar</button>
+		</li>
+
+
+	</ul>
+
+	</div>
+
+</div>
+
+	<script src="scripts/app.js"></script>
+</body>
+</html>

@@ -819,4 +819,128 @@ ATRIBUTOS PROPS:
 
         :class="x.id %2==1 ? 'lavanda' : 'coral'"
     
-    -desde la consola, el panel de Vuejs podremos ver cada componente creado y las respectivas propiedades de cada elemento .
+    -desde la consola, el panel de Vuejs podremos ver cada componente creado y las respectivas propiedades de cada elemento .    
+
+
+CLASE N°5: 
+
+Viseo clase:
+https://drive.google.com/file/d/1-rAnQTySMQPxP6-YKIl0Ql1_dYvr9cTK/view
+
+LOCAL STORAGE:
+
+    -Forma parte(al igual que sessionStorage) de las Apis html5
+
+    -nos permite lograr la persistencia de datos en la aplicacion
+
+    -espera una clave y un valor para la informacion
+
+    -es un objeto Javascript, por lo tanto tiene metodos y una propiedad 
+
+    -estos metodos nos permiten hacer distintos tipo de cosas:
+        -setear elementos 
+        -obtener los ya guardados
+        -borrar items o todo 
+
+
+    METODOS: 
+
+        localStorage.setItem(clave, valor);
+
+            -cuando reciba una clave y un valor, añadira estos al almacenamient, o actualizara el valor si la clave ya existe 
+
+        localStorage.getItem(key):
+
+            -devuelve el valor de la clave cuyo nombre se le pasa por parametro, si la clave no existe, devuelve null.
+
+        localStorage.removeItem(key):
+
+            -Elimina la clave cuyo nombre recibe por parametro de almacenamient
+
+        localStorage.clear();
+
+            -Elimina todas las claves que haya en el almacenamiento
+
+        localStorage.key(0);
+
+            -nos permite saber las claves que tenemos guardadas como argumento pondremos el numero de elementos de la clave 
+
+    LA PROPIEDAD
+
+        localStorage.lenght;
+
+            -nos devuelve el numero de elementos guardados
+
+LOCALSTORAGE - JSON 
+
+    ..Limitacion --> Solo podemos guardar cadenas de texto, es decir, solo podemos almacenar datos de tipo string 
+
+    -Si queremos guardar booleanos, numeros, etc? tedremos que usar funciones de parseo de datos 
+
+    -necesitamos el formato JSON 
+
+    -JSON --> JavaScript Object Notation 
+
+    -Sirve para representar datos como atributos con valores, derivado originalmente de la sintaxis de JS 
+
+    -Proporciona un medio ideal para encapsular los datos entre el cliente y el servidor 
+
+    SERIALIZAR - DESERIALIZAR 
+
+        -JSON se usa para representar objetos, con texto serializado(proceso de codificacion de un objeto en un medio de almacenamiento, como localStorage)
+
+        -en complemento la deserializacion cosiste en convertir una secuencia en un objeto 
+
+        -ambos permiten almacenar y transferir facilmente datos
+
+        -los objetos serializados podrian guardarse en un archivo de texto plano 
+
+        -si tenemos que consultar alguna representacion debenos "desearializar"(reconstruir) el archivo de texto plato a objetos 
+
+        -Para estos procesos Json posee 2 funciones : JSON.stringify() y JSON.parse()
+
+        JSON.stringify() -> Recibe por parameto un array y devuelve un string en formato JSON 
+
+        JSON.parse() -> Recibe por parametro el string y devuelve el ARRAYS
+
+    ENTONCES: 
+
+        Para guardar usamos el .stringify 
+
+        para mostrar usamos el .parse 
+
+    MANIPULAR DATOS EN LOCAL: 
+
+
+    1-
+        -Usamos el metodo setItem: guardamos con la clave nombre y le pasamos el valor 
+
+        -Usamos el getItem, pide la clave llamada nombre desde localStorage y lo guardamos en dato_recuperado_local
+
+    2- 
+        -Las claves se almacenan en un array y son consideradas como propiedades del objeto localStorage
+
+            localStorage["nombre"]= nombre;
+
+            var dato_recuperado_local = localStorage["nombre"]
+
+
+
+    3-
+        -Tambien podemos referenciar las claves como propiedades del objeto localStorage
+
+            localStorage.nombre = nombre
+
+            var dato_recuperado_local = localStorage.nombre 
+
+
+Y si queremos guardar mas datos, y ottro tipos como number, boolean, object, etc ?
+
+    -Podriamos guardar los datos en un objeto 
+
+    -definir en el objeto las propiedades y los valores que nos llegan desde el html 
+
+    no hay que olvidarse que para mostralo tenemos que usar el stringify
+
+
+si queremos guardar varios datos, tenemos que tener en cuenta que debemos crear una logica que analice si existe, si no lo existe que lo cree, y si existe que se sume a un array y que no lo pise 

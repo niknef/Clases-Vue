@@ -1,3 +1,7 @@
+[v-cloak] {
+    display: none;
+}
+
 :root{
     --clr-primario-oscuro: #522073;
     --clr-primario: #7021BF;
