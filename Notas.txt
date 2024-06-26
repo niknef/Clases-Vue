@@ -944,3 +944,125 @@ Y si queremos guardar mas datos, y ottro tipos como number, boolean, object, etc
 
 
 si queremos guardar varios datos, tenemos que tener en cuenta que debemos crear una logica que analice si existe, si no lo existe que lo cree, y si existe que se sume a un array y que no lo pise 
+
+
+CLASE N°6
+
+https://drive.google.com/file/d/1_JLy0I1WAy8A9zvTMf2t2fyobk0EKfQ5/view
+
+FORMULARIOS:
+
+    -Los formularios son el elemento de iteraccion elemental de todo sistema, web o aplicacion
+
+    -Hay ciertas cuestiones que tenmos que recorda dependiendo del elemento que queremos usar para el ingreso de datos de 2 vias 
+
+    -La directiva v-model, dentro del mundo Vue, nos premite crear el data binding de 2 vias o el enlace de datos de 2 vias.
+
+    -Controles cmo inputs, textarea y select poseen esta directiva para poder actualizar de manera correcta el elemento segun el tipo de entrada 
+
+    -En los elementos de tipo textarea la interpolacion no funcio.
+
+
+        <textarea v-model="form_data.comentario"></textarea> (manera correcta)
+
+    CHECKBOX SIMPLES CON VALOR BOOLEANO:
+
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checlbox">{{checked}}</label>
+
+        los valores que retorna la eleccion puede ser true o false 
+
+    
+    -Si el valor inicial del v-model no coincide con ninguna de las opciones, el elemento <select> sera unselected 
+
+    -en iOS esto hara que el usuario no pueda seleccionar el primer elemnto por que iOS no dispara un evento de tipo change 
+
+    -se recomienda dar una opcion deshabilidatada con un value vacio 
+
+    SELECECCION MULTIPLE 
+
+        <select v-model="selected" multiple>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <span>Seleccionados: {{selected}}</span>
+
+    SELECT DINAMICO CON V-FOR 
+
+        <select v-model="elegido">
+            <option v-for="item in options" :value="item.value">
+            </option>
+        </select>
+        <span>Sellecionado: {{elegido}}</span>
+
+        ---logica---
+
+        data:{
+            elegido:'A'
+            options:[
+                {texto:'Uno',value:'A'},
+                {texto:'Dos',value:'B'},
+                {texto:'Tres',value:'C'}
+            ]
+        }
+
+    VINCULAR VALORES:
+
+        -En los casos de radio, checkbox y option de slect, los valores de vinculacion del v-model suelen ser strings o booleanos 
+
+            <input type="radio" v-model="elegido" value="a">
+
+        (elegido es una string "a" cuando esta chequeado )
+
+            <input type="checkbox" v-model="toggle>
+
+        (toggle es verdadero o falso )
+
+        <select v-model="seleccion">
+            <option value="PC">Pc</option>
+
+        </select>
+
+        ("seleccion" es un string "Pc" cuando se seleccion la primera opcion)
+
+        .puede pasar que queramos vincular el valor a una propiedad dinamica en la instancia Vue 
+
+        .Podemos usar v-bind para lograr eso. Ademas, el uso de v-bind nos permite vincular el valor de entrada a los valor no string
+
+    EN CHECKBOX
+
+        <input type="checkbox" v-model="sw" true-value="si" false-value="no"/>
+
+        .los atributos true-value y de false-value no afectan la entrada del atributo value. Los browsers no envian casillas sin marcar 
+
+    EN RADIO 
+
+        <input type="radio" v-model="elegido" v-bind:value="a">
+
+        cuando este elemento esta marcado su valor sera "a" 
+
+    EN SELECT 
+
+        <select v-model="selected">
+            <option v-bind:value="{number:123}">123</option>
+        </select>
+
+    MODIFICADORES 
+
+        - .lazy --> de forma predeterminada, v-model sincroniza el input con los datos despues de cada evento de tipo input 
+
+        podemos agregar el modificador lazy para realizar la sincronizacion despues del evento change;
+
+            <input v-model.lazy="msg">
+
+        - .number --> podemos configurar que las entradas del usuario se escriban automaticamente como un numero, agregando el modificador number al v-model del elemento:
+
+            <input v-model.number="edad" type="number">
+
+        .esto suele ser util ya que con type="number" el valor retornado siempre sera una cadena de textp 
+
+        .trim --> nos permite recortar los espacios de las entradas del usuario automaticamente, agregando el modificador trim al v-model del elemento (inicio-fin)
+
+            <input v-model.trim="msg">
+            
