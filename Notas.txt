@@ -1065,4 +1065,298 @@ FORMULARIOS:
         .trim --> nos permite recortar los espacios de las entradas del usuario automaticamente, agregando el modificador trim al v-model del elemento (inicio-fin)
 
             <input v-model.trim="msg">
-            
+
+
+CLASE 7: 
+
+    CONSULTAS:
+    https://drive.google.com/file/d/1QmJa8uEqzhiQZFzdc2lT-Cmkf5AdlMyP/view
+
+CLASE 8:
+
+    ADM:
+
+    https://drive.google.com/file/d/1MuK2-jBoDr5lE5TQNleqI-HSSZyNakIy/view
+
+VALIDAR FORMULARIO:
+
+    -Dependiendo del tipo de campo y de la informacion que queramos almacenar, hay que tener presente el aviso al usuario para facilitarle la tarea 
+
+
+            "mensajes de alerta"
+
+    -indicarle al usuario, lo que nosotros esperamos de ese campo, le dara la retroalimentacion necesario y tendra una buena experiencia.
+
+    -Desde VueJs podemos hacerlo sin problemas
+
+    -Cuando el usuario quiera enviar el formulario, si hay errores, le ocmunicaremos que es lo que debe corregir.
+
+    -sabemos que gracias a html5 el browser nos permite realizar validaciones, pero vamos a correrlo de esta responsabilidad para que vue se encargue de esto 
+
+        <form v-on:sumbit.prevent="guardar" novalidate>
+
+    -el atributo novalidate, permite anular las validaciones tipicas del browser por medio de los atributos de html5 
+
+    -podemos generar un array de errores e iniciarlizarlo desde el ddata del componente form 
+
+    -Iremos verificando si estos elementos tienen contenido, o si son null, o si cumplen con determinada cantidad de caracteres, etc 
+
+    -si no cumple un campo con lo que estamos esperando que ingrese el usuario, haremos un push al array de erorres y crearemos el mensaje que vera el usuario 
+
+
+        data:function(){
+            return{
+                titulo:null,
+                anio:null,
+                errores:[],
+
+            }
+        }
+
+        "desde nuestro componente iniciamos las variables asosiadas a los v-model y el array que sera responasable de ir mostrando los errores"
+
+    -Una vez que el usuario quiera enviar el form ejecutaremos las comprobaciones necesarios 
+
+    if(!this.titulo){
+        this.errores.push('El titulo es obligatorio');
+    if(!this.anio){
+        this.errores.push('El año es obligatorio')
+    }
+    }
+
+    -Desde la prpiedad template del componente tendremos el html para mostrarlo 
+
+    <div v-if="enviado===true">
+        <div v-if="this.errores.length > 0" class="classerror">
+
+        <ul>
+        <li v-for="x in errores">{{x}}</li>
+        </ul>
+
+        "si hay errores, recorrera el array de erorres y los mostrara en la iteracion"
+
+    if(this.errores.length == 0){
+        nuevoObj = {
+            comentario:this.comentario,
+            titulo:this.titulo,
+            seleccion:this.seleccion,
+            anio:this.anio 
+        }
+    }
+
+        "Si no hay errores, creamos un objeto en la logica con todos los v-model de los controles del formulario"
+
+
+    -Caso contrario significa que no hay errores y mostrara el mensaje de enviado con exito 
+
+        <div v-else class="enviado">
+            <span>Enviado con exito</span>
+        </div>
+
+    -Una vez que se cumplan las validaciones y todo este ok, verificaremos que this.errores.length sea == 0 
+
+    -recien en ese momento verificaremos si existe el key en localStorage y haremos el push del nuevo juego
+
+    -pasaremos la informacion y guardaremos en el localStorage 
+
+
+        nuevoObj={comentario:this.comentario,
+        titulo:this.titulo,
+        seleccion:this.seleccion,
+        anio:this.anio,}
+
+            if(!localStorage.dato){
+                this.arr=[]
+            }else{
+                this.arr=JSON.parse(localStorage.getItem("dato"))
+            }
+
+        this.arr.push(nuevoObj)
+        localStorage.setItem("dato",JSON.stringify(this.arr))
+
+    -Con esta lógica, solo veremos lo que se va ingresando cuando se ejecute la funcion guardar.
+
+
+        <div v-if="this.arr.length > 0">
+            <h2>Datos</h2>
+                <ul>
+                    <li v-for="item in arr">
+                        {{item.titulo}}, {{item.comentario}}
+                        <span v-for="x in item.seleccion">{{x}}, </span> {{item.anio}}</li>
+                </ul>
+        </div>
+
+        -El condicional, nos permite controlar que el titulo Datos no se muestre si no hay elementos que mostrar 
+
+        -en cuyo caso, caemos en el else y le mostraremos al usuario algun mensaje para que cargue datos.
+
+
+CLASE 9: 
+
+    https://drive.google.com/file/d/1QGzLPW89fT1sup0FWueNtobPGI4xMa6J/view
+
+    PROYECTO: 
+
+    -Un proyecto creado con Vue puede tener multiples formas de crearse 
+
+        -CDN
+        -LOCAL
+        -Herramienta @vue/cli (actua de asistente y permite crear una estructura de carpetas con un proyexto Vue inicial, con todas las herramientas que necesitemos instaladas y listo para trabjar)
+
+        NECESITAMOS NODE.JS
+
+Que es node.js?
+
+    -Entorno de ejecucion para JS 
+    -Servidor Web   
+    
+    una vez instalado podemos ver en cmd con npm -v y node -v la version 
+
+@vue/cli 
+
+    -Interfaz de linea de comandos de Vue 
+    -permite crear una estructura de carpetas con un proyecto Vue inicial, con todas las herramientas instaladas 
+
+            npm install -g @vue/clo 
+
+            vue create nombre-proyecto 
+
+    -esto nos permite empezar con proyecto de ejemplo base, con babel y eslint 
+    -tambien elegir a modo manual el tipo de instalacion que requerimos
+
+Babel  
+    -es un compilador de JavaScript     
+    -Se encarga de convertir codigo ECMAScript a una version de JS compatible con versiones anteriores que cualquier entorno pueda entender 
+
+ESlint 
+    -analiza nuestro codigo para encontrar problemas 
+    -Su objetivo es que nuestro codigo sea mas consistente y evitar errores 
+
+
+-Una vez terminada la creacion del proyexto, accedemos a la carpeta creada por consola ( cd pro)
+
+-luego npm run serve 
+
+- cuando inice el servidor nos mostrara en consola la direcciopn por la cual vamos a acceder con el browser 
+
+-si queremos cambiar el puerto -  npm run serve -- --port 3000
+
+-DETENER SERVIDOR: CTRL + C 
+
+-Para saber los compandos soportados npm help
+
+
+
+ESTRUCTURA :
+
+    -readme.md fichero con info 
+
+    -gitignore podemos elegir que queremos que git ignore- obligatorio para ignorar node_modules 
+
+    -babel.config.js Configuracion de babel 
+
+        tiene info sobre los presets, plugins y otros detalles de babel sobre el proyexto para saber como va a realizar la transpilacion de codigo js moderno a antiguo 
+
+    -vue.config.js y jsconfig.json son archivos configurados para personalizar el proyecto 
+
+    .public - se utiliza para almacenar ficheros estaticos que no seran procesados por el framework 
+
+    -src (mas importantes) codigo fuente
+        -archivos originales sin procesar 
+
+    - .vue son conocidos SFC (Single File Components)
+        archivos especiales de Vue, poseen template, script , style 
+
+    - assets . los archivos que tenemos dentro se usan en nuestro codigo importandolos
+
+    -components tendra los componentes .vue que vamos creando durante nuestro proyecto 
+
+    -App.vue es el componente general 
+
+    -main.js fichero principal que arranca el proyecto Vue 
+
+    dist/ almacena archivos finales 
+
+    Webpack es una herramienta que empaqueta y optimiza los recursos (js, imagenes, fuentes, css, etc) y los transforma en archivos que pueda entender el navegador
+
+    solo se guardan en la carpeta dist si creamos un build en la modalidad de produccion.
+
+    -node_modules instalamos paquetes o dependecias mediante npm 
+
+    -desde nuestro js podemos importar paquetes externos instalados mediante npm 
+
+para saber que dependencias tenemos instaladas en un proyexto utilizar el comando npm list y el parametro --depth 0 
+
+
+.VUE : 
+
+    3 secciones;
+
+        template
+        script 
+        style 
+
+
+    App.vue 
+
+        componente padre dentro de su propio template tiene al componente hijo 
+
+    main.js 
+
+        punto de netrada de Js y contiene : 
+
+        -core de vue 
+        -App 
+
+
+CLASE 10: 
+
+https://drive.google.com/file/d/1L9Sxb-HyH5O6GUmFDsHqlHb28E-Elq5y/view
+
+Ciclo de vida Vuejs 
+
+    beforeCreate: se invoca inmediatamente despues de que se ha inicializado la instancia, antes de la observacion de datos y la configuracion de eventos y observacores 
+
+    created:Se invoca despues de crear la instancia
+    la instancia ha terminado de procesar las opciones 
+    la propiedad $el aun no esta disponibles
+    
+    BeforeMount: invocado justo antes de que comience el montaje: la funcion render esta punto de ser llamado por primera vez 
+
+    Mounted: es invocado despues de que se montado la instancia, donde "el" se reemplaza por el recien creado vm.$el. si la instancia raiz esta montada en un elemento en el documento vm$el tambien esta en el documento cuando se llame a mounted 
+
+    beforeUpdate: el invocado cuando los datos cambian, antes de que se actualize el DOM. este es un buen lugar para acceder al DOM existente antes de una actualizacion.
+
+    updated: invocado despues de que un cambio de datos hace que el DOM virtual se vuelva a procesar y actualizar 
+
+    beforeDestroy: justo antes de que se destuya una instancia de Vue. en esta etapa la instancia todavia es funcional 
+
+    Destroyed: invocado despues de que una intancia de Vue ha sido destruida. cuando se llama a este hook, todas las directivas de la instancia de Vue se han desvinculado, todos los listeners de evento se eliminan y todas las instancias de Vue secundarias tambien se han destruidos.
+
+    -desde la consola vamos a crear un proyexto que tenfa vue-router 
+
+    -sobre la particion o ruta que seleccionen en sus pc, crearemos el proyecto "enrutamiento"
+
+    vue create enrutamineto 
+
+        -elegiremos Manually select features 
+
+        -nos mostrara las opciones para configurar el nuevo proyecto 
+
+        -para seleccionar los items usamos la tecla space 
+
+        -el proyextot tendra vue 2 , babel, eslint y router 
+
+        -router sin history - eslint con prevencion de errores que revise el codigo al guardar y que todo lo que se guarde en archivos especificos 
+
+        -una vez que se cree el proyecto entramos en la carpeta enrutamiento 
+
+            cd enrutamiento 
+
+        -con el comando dir, podremos ver la estructura de archivos generada 
+
+        -finalmente corremos en servido 
+
+            npm run serve 
+
+        -si examinamos la estructuras de archivos veremos que se crearon 2 carpetas views y router 
